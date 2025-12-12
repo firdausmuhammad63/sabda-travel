@@ -63,83 +63,85 @@ export default function App() {
         return (
           <div className="pb-24 animate-fade-in bg-slate-50">
             {/* Hero Section */}
-            <div className="relative h-72 bg-emerald-800 rounded-b-[40px] overflow-hidden shadow-xl">
+            <div className="relative h-80 bg-emerald-800 rounded-b-[48px] overflow-hidden shadow-2xl">
               <img 
                 src="https://picsum.photos/800/600?grayscale&blur=2" 
                 alt="Kaaba Background" 
                 className="absolute inset-0 w-full h-full object-cover opacity-30"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-900 via-emerald-900/50 to-transparent"></div>
-              <div className="relative z-10 px-6 pt-12 h-full flex flex-col justify-start text-white">
-                <div className="flex justify-between items-start">
+              <div className="absolute inset-0 bg-gradient-to-t from-emerald-900 via-emerald-900/60 to-transparent"></div>
+              <div className="relative z-10 px-6 pt-14 h-full flex flex-col justify-start text-white">
+                <div className="flex justify-between items-center mb-6">
                     <div>
-                        <h1 className="text-2xl font-serif font-bold mb-1 text-gold-400">Sabilulhuda Travel</h1>
-                        <p className="text-emerald-100 text-sm mb-4 max-w-[200px]">Sahabat Ibadah Anda Menuju Baitullah.</p>
+                        <h1 className="text-2xl font-serif font-bold text-gold-400 leading-tight">Sabilulhuda<br/>Travel</h1>
+                        <p className="text-emerald-100 text-sm mt-1">Sahabat Ibadah Anda.</p>
                     </div>
-                    <img src="https://ui-avatars.com/api/?name=S+H&background=fbbf24&color=fff&size=48" className="rounded-full border-2 border-white/20 shadow-lg" alt="Logo"/>
+                    <div className="bg-white/10 p-1 rounded-full backdrop-blur-sm">
+                       <img src="https://ui-avatars.com/api/?name=S+H&background=fbbf24&color=fff&size=56" className="rounded-full shadow-lg" alt="Logo"/>
+                    </div>
                 </div>
               </div>
             </div>
 
             {/* Quick Menu Grid - Floating Overlay */}
-            <div className="px-5 -mt-24 relative z-20">
-              <div className="bg-white rounded-2xl shadow-xl p-6 border border-emerald-50">
-                <div className="grid grid-cols-4 gap-y-8 gap-x-4">
+            <div className="px-4 -mt-28 relative z-20">
+              <div className="bg-white rounded-[2rem] shadow-xl p-6 border border-emerald-50/50 backdrop-blur-xl">
+                <div className="grid grid-cols-4 gap-y-6 gap-x-2 place-items-center">
                   {/* Menu Items */}
-                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      <Package size={22} />
+                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-emerald-50 rounded-[1.2rem] flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100 group-hover:scale-105 group-hover:shadow-md">
+                      <Package size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Umroh</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-emerald-700">Umroh</span>
                   </button>
 
-                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      <Building size={22} />
+                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-emerald-50 rounded-[1.2rem] flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100 group-hover:scale-105 group-hover:shadow-md">
+                      <Building size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Haji</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-emerald-700">Haji</span>
                   </button>
 
-                  <button onClick={() => setActiveTab('manasik')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      <BookOpen size={22} />
+                  <button onClick={() => setActiveTab('manasik')} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-emerald-50 rounded-[1.2rem] flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100 group-hover:scale-105 group-hover:shadow-md">
+                      <BookOpen size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Manasik</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-emerald-700">Manasik</span>
                   </button>
 
-                  <button onClick={() => scrollToSection('promo')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-all shadow-sm">
-                      <Star size={22} />
+                  <button onClick={() => scrollToSection('promo')} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-gold-50 rounded-[1.2rem] flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-all duration-300 shadow-sm border border-gold-100 group-hover:scale-105 group-hover:shadow-md">
+                      <Star size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Promo</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-gold-600">Promo</span>
                   </button>
 
-                  <button onClick={handleCheckStatus} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-sm">
-                      <Briefcase size={22} />
+                  <button onClick={handleCheckStatus} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-blue-50 rounded-[1.2rem] flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-sm border border-blue-100 group-hover:scale-105 group-hover:shadow-md">
+                      <Briefcase size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">My Trip</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-blue-600">My Trip</span>
                   </button>
 
-                  <button onClick={handleConsultation} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      <Send size={22} />
+                  <button onClick={handleConsultation} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-emerald-50 rounded-[1.2rem] flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100 group-hover:scale-105 group-hover:shadow-md">
+                      <Send size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Chat</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-emerald-700">Chat</span>
                   </button>
 
-                   <button onClick={() => handleBook('Umroh')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      <FileText size={22} />
+                   <button onClick={() => handleBook('Umroh')} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-emerald-50 rounded-[1.2rem] flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100 group-hover:scale-105 group-hover:shadow-md">
+                      <FileText size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Daftar</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-emerald-700">Daftar</span>
                   </button>
 
-                   <button onClick={() => setActiveTab('kontak')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      <MapPin size={22} />
+                   <button onClick={() => setActiveTab('kontak')} className="flex flex-col items-center gap-2 group w-full">
+                    <div className="w-16 h-16 bg-emerald-50 rounded-[1.2rem] flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100 group-hover:scale-105 group-hover:shadow-md">
+                      <MapPin size={28} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Lokasi</span>
+                    <span className="text-[11px] font-bold text-gray-700 text-center leading-tight tracking-tight group-hover:text-emerald-700">Lokasi</span>
                   </button>
                 </div>
               </div>
