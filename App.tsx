@@ -51,6 +51,12 @@ export default function App() {
      window.open(url, '_blank');
   };
 
+  const handleConsultation = () => {
+     const message = `Assalamualaikum, saya ingin konsultasi mengenai paket Umroh/Haji.`;
+     const url = `https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(message)}`;
+     window.open(url, '_blank');
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'beranda':
@@ -77,134 +83,91 @@ export default function App() {
 
             {/* Quick Menu Grid - Floating Overlay */}
             <div className="px-5 -mt-24 relative z-20">
-              <div className="bg-white rounded-2xl shadow-xl p-5 border border-emerald-50">
-                <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+              <div className="bg-white rounded-2xl shadow-xl p-6 border border-emerald-50">
+                <div className="grid grid-cols-4 gap-y-8 gap-x-4">
                   {/* Menu Items */}
                   <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
-                      <Package size={20} />
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                      <Package size={22} />
                     </div>
                     <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Umroh</span>
                   </button>
 
                   <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
-                      <Building size={20} />
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                      <Building size={22} />
                     </div>
                     <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Haji</span>
                   </button>
 
                   <button onClick={() => setActiveTab('manasik')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
-                      <BookOpen size={20} />
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                      <BookOpen size={22} />
                     </div>
                     <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Manasik</span>
                   </button>
 
-                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
-                      <FileText size={20} />
+                  <button onClick={() => scrollToSection('promo')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-all shadow-sm">
+                      <Star size={22} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Harga Paket</span>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Promo</span>
                   </button>
 
-                  <button onClick={() => scrollToSection('galeri')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-colors shadow-sm">
-                      <Camera size={20} />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Galeri</span>
-                  </button>
-
-                  <button onClick={() => scrollToSection('testimoni')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-colors shadow-sm">
-                      <Users size={20} />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Testimoni</span>
-                  </button>
-
-                   <button onClick={handleCheckStatus} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-colors shadow-sm">
-                      <Briefcase size={20} />
+                  <button onClick={handleCheckStatus} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-sm">
+                      <Briefcase size={22} />
                     </div>
                     <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">My Trip</span>
                   </button>
 
-                   <button onClick={() => setActiveTab('kontak')} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
-                      <Phone size={20} />
+                  <button onClick={handleConsultation} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                      <Send size={22} />
                     </div>
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Kontak</span>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Chat</span>
+                  </button>
+
+                   <button onClick={() => handleBook('Umroh')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                      <FileText size={22} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Daftar</span>
+                  </button>
+
+                   <button onClick={() => setActiveTab('kontak')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
+                      <MapPin size={22} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Lokasi</span>
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Highlights / Keunggulan */}
-            <div className="px-5 mt-6">
-              <h2 className="text-lg font-bold text-gray-800 mb-4 font-serif border-l-4 border-gold-500 pl-3">
-                Mengapa Memilih Kami?
-              </h2>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { icon: <CheckCircle className="text-emerald-600" size={20} />, title: "Legalitas Resmi", desc: "Izin Kemenag RI" },
-                  { icon: <User className="text-emerald-600" size={20} />, title: "Pembimbing", desc: "Bersertifikat BNSP" },
-                  { icon: <BookOpen className="text-emerald-600" size={20} />, title: "Manasik", desc: "Bimbingan Lengkap" },
-                  { icon: <Star className="text-emerald-600" size={20} />, title: "Fasilitas VIP", desc: "Hotel Dekat Masjid" },
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-white p-3 rounded-xl shadow-sm border border-emerald-50 flex flex-col items-center text-center">
-                    <div className="mb-2 bg-emerald-50 p-2 rounded-full">{item.icon}</div>
-                    <h3 className="font-bold text-gray-800 text-xs uppercase tracking-wide mb-1">{item.title}</h3>
-                    <p className="text-[10px] text-gray-500 leading-tight">{item.desc}</p>
-                  </div>
-                ))}
+            {/* Featured Promo Section (Clean Replacement for Clutter) */}
+            <div id="promo" className="px-5 mt-8">
+              <div className="flex items-center justify-between mb-4">
+                 <h2 className="text-lg font-bold text-gray-800 font-serif border-l-4 border-gold-500 pl-3">
+                    Rekomendasi Paket
+                 </h2>
+                 <button onClick={() => setActiveTab('paket')} className="text-xs text-emerald-600 font-bold hover:underline">Lihat Semua</button>
+              </div>
+              
+              {/* Show only the first package as 'Featured' */}
+              <PackageCard pkg={PACKAGES[0]} onBook={handleBook} />
+              
+              <div className="bg-emerald-50 rounded-xl p-4 flex items-center justify-between border border-emerald-100 mt-4">
+                 <div>
+                    <h3 className="text-sm font-bold text-emerald-800">Butuh Bantuan?</h3>
+                    <p className="text-xs text-emerald-600">Tim kami siap membantu 24/7</p>
+                 </div>
+                 <button onClick={handleConsultation} className="bg-emerald-600 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-sm hover:bg-emerald-700 transition-colors">
+                    Hubungi Kami
+                 </button>
               </div>
             </div>
 
-            {/* Galeri Mini */}
-            <div id="galeri" className="px-5 mt-8 pt-4">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-bold text-gray-800 font-serif border-l-4 border-gold-500 pl-3">
-                    Dokumentasi Jamaah
-                </h2>
-                <button className="text-xs text-emerald-600 font-bold">Lihat Semua</button>
-              </div>
-              <div className="flex overflow-x-auto space-x-3 no-scrollbar pb-2">
-                {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="flex-shrink-0 w-36 h-36 rounded-xl overflow-hidden relative shadow-md group">
-                         <img src={`https://picsum.photos/200/200?random=${i}`} className="w-full h-full object-cover transition duration-300 group-hover:scale-110" alt="Galeri" />
-                         <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent text-white text-[10px] p-2 pt-4 text-center">Keberangkatan 2023</div>
-                    </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Testimonials */}
-            <div id="testimoni" className="px-5 mt-6 mb-4 pt-4">
-              <h2 className="text-lg font-bold text-gray-800 mb-4 font-serif border-l-4 border-gold-500 pl-3">
-                Kata Mereka
-              </h2>
-              <div className="space-y-3">
-                {TESTIMONIALS.map((t) => (
-                  <div key={t.id} className="bg-white p-4 rounded-xl shadow-sm border-l-4 border-emerald-500">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xs">
-                              {t.name.charAt(0)}
-                          </div>
-                          <div>
-                            <p className="font-bold text-gray-800 text-xs">{t.name}</p>
-                            <p className="text-[10px] text-emerald-600">{t.role}</p>
-                          </div>
-                      </div>
-                      <div className="flex text-gold-500">
-                        {[...Array(t.rating)].map((_, i) => <Star key={i} size={10} fill="currentColor" />)}
-                      </div>
-                    </div>
-                    <p className="text-gray-600 italic text-xs leading-relaxed">"{t.text}"</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         );
 
