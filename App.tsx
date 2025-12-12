@@ -1,0 +1,436 @@
+import React, { useState } from 'react';
+import { 
+  Home, Package, BookOpen, Phone, 
+  MapPin, Send, Star, CheckCircle, 
+  PlayCircle, FileText, Menu, User, Calendar,
+  Camera, Users, Briefcase, Building
+} from './components/Icons';
+import { PackageCard } from './components/PackageCard';
+import { PACKAGES, TESTIMONIALS, MANASIK_SCHEDULE, MANASIK_MATERIALS, CONTACT_PHONE, OFFICE_ADDRESS } from './constants';
+
+type Tab = 'beranda' | 'paket' | 'manasik' | 'kontak';
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState<Tab>('beranda');
+  const [selectedPackage, setSelectedPackage] = useState<string>('');
+  
+  // Registration Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    pax: '1',
+  });
+
+  const handleBook = (pkgName: string) => {
+    setSelectedPackage(pkgName);
+    setActiveTab('kontak');
+    // Ideally scroll to form or focus it
+    setTimeout(() => {
+        const formElement = document.getElementById('registrasi-form');
+        if (formElement) formElement.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `Assalamualaikum, saya ${formData.name}. Berminat daftar paket ${selectedPackage || 'Umroh/Haji'}. Jumlah jamaah: ${formData.pax}. Mohon infonya.`;
+    const url = `https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
+  const handleCheckStatus = () => {
+     const message = `Assalamualaikum, saya ingin cek status keberangkatan/porsi haji saya. Mohon bantuannya.`;
+     const url = `https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(message)}`;
+     window.open(url, '_blank');
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'beranda':
+        return (
+          <div className="pb-24 animate-fade-in bg-slate-50">
+            {/* Hero Section */}
+            <div className="relative h-72 bg-emerald-800 rounded-b-[40px] overflow-hidden shadow-xl">
+              <img 
+                src="https://picsum.photos/800/600?grayscale&blur=2" 
+                alt="Kaaba Background" 
+                className="absolute inset-0 w-full h-full object-cover opacity-30"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-emerald-900 via-emerald-900/50 to-transparent"></div>
+              <div className="relative z-10 px-6 pt-12 h-full flex flex-col justify-start text-white">
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h1 className="text-2xl font-serif font-bold mb-1 text-gold-400">Sabilulhuda Travel</h1>
+                        <p className="text-emerald-100 text-sm mb-4 max-w-[200px]">Sahabat Ibadah Anda Menuju Baitullah.</p>
+                    </div>
+                    <img src="https://ui-avatars.com/api/?name=S+H&background=fbbf24&color=fff&size=48" className="rounded-full border-2 border-white/20 shadow-lg" alt="Logo"/>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Menu Grid - Floating Overlay */}
+            <div className="px-5 -mt-24 relative z-20">
+              <div className="bg-white rounded-2xl shadow-xl p-5 border border-emerald-50">
+                <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+                  {/* Menu Items */}
+                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
+                      <Package size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Umroh</span>
+                  </button>
+
+                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
+                      <Building size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Haji</span>
+                  </button>
+
+                  <button onClick={() => setActiveTab('manasik')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
+                      <BookOpen size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Manasik</span>
+                  </button>
+
+                  <button onClick={() => setActiveTab('paket')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
+                      <FileText size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Harga Paket</span>
+                  </button>
+
+                  <button onClick={() => scrollToSection('galeri')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-colors shadow-sm">
+                      <Camera size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Galeri</span>
+                  </button>
+
+                  <button onClick={() => scrollToSection('testimoni')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center text-gold-600 group-hover:bg-gold-500 group-hover:text-white transition-colors shadow-sm">
+                      <Users size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Testimoni</span>
+                  </button>
+
+                   <button onClick={handleCheckStatus} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-colors shadow-sm">
+                      <Briefcase size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">My Trip</span>
+                  </button>
+
+                   <button onClick={() => setActiveTab('kontak')} className="flex flex-col items-center gap-2 group">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
+                      <Phone size={20} />
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight">Kontak</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Highlights / Keunggulan */}
+            <div className="px-5 mt-6">
+              <h2 className="text-lg font-bold text-gray-800 mb-4 font-serif border-l-4 border-gold-500 pl-3">
+                Mengapa Memilih Kami?
+              </h2>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: <CheckCircle className="text-emerald-600" size={20} />, title: "Legalitas Resmi", desc: "Izin Kemenag RI" },
+                  { icon: <User className="text-emerald-600" size={20} />, title: "Pembimbing", desc: "Bersertifikat BNSP" },
+                  { icon: <BookOpen className="text-emerald-600" size={20} />, title: "Manasik", desc: "Bimbingan Lengkap" },
+                  { icon: <Star className="text-emerald-600" size={20} />, title: "Fasilitas VIP", desc: "Hotel Dekat Masjid" },
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-white p-3 rounded-xl shadow-sm border border-emerald-50 flex flex-col items-center text-center">
+                    <div className="mb-2 bg-emerald-50 p-2 rounded-full">{item.icon}</div>
+                    <h3 className="font-bold text-gray-800 text-xs uppercase tracking-wide mb-1">{item.title}</h3>
+                    <p className="text-[10px] text-gray-500 leading-tight">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Galeri Mini */}
+            <div id="galeri" className="px-5 mt-8 pt-4">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-bold text-gray-800 font-serif border-l-4 border-gold-500 pl-3">
+                    Dokumentasi Jamaah
+                </h2>
+                <button className="text-xs text-emerald-600 font-bold">Lihat Semua</button>
+              </div>
+              <div className="flex overflow-x-auto space-x-3 no-scrollbar pb-2">
+                {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="flex-shrink-0 w-36 h-36 rounded-xl overflow-hidden relative shadow-md group">
+                         <img src={`https://picsum.photos/200/200?random=${i}`} className="w-full h-full object-cover transition duration-300 group-hover:scale-110" alt="Galeri" />
+                         <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent text-white text-[10px] p-2 pt-4 text-center">Keberangkatan 2023</div>
+                    </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Testimonials */}
+            <div id="testimoni" className="px-5 mt-6 mb-4 pt-4">
+              <h2 className="text-lg font-bold text-gray-800 mb-4 font-serif border-l-4 border-gold-500 pl-3">
+                Kata Mereka
+              </h2>
+              <div className="space-y-3">
+                {TESTIMONIALS.map((t) => (
+                  <div key={t.id} className="bg-white p-4 rounded-xl shadow-sm border-l-4 border-emerald-500">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xs">
+                              {t.name.charAt(0)}
+                          </div>
+                          <div>
+                            <p className="font-bold text-gray-800 text-xs">{t.name}</p>
+                            <p className="text-[10px] text-emerald-600">{t.role}</p>
+                          </div>
+                      </div>
+                      <div className="flex text-gold-500">
+                        {[...Array(t.rating)].map((_, i) => <Star key={i} size={10} fill="currentColor" />)}
+                      </div>
+                    </div>
+                    <p className="text-gray-600 italic text-xs leading-relaxed">"{t.text}"</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'paket':
+        return (
+          <div className="px-5 pt-20 pb-24 animate-fade-in bg-slate-50 min-h-screen">
+             <div className="fixed top-0 left-0 right-0 max-w-md mx-auto z-20 bg-emerald-800/95 backdrop-blur-sm p-4 text-white shadow-lg rounded-b-xl flex items-center justify-between">
+                 <h2 className="text-lg font-serif font-bold">Pilihan Paket Ibadah</h2>
+                 <div className="bg-white/20 p-1.5 rounded-lg"><Package size={18}/></div>
+             </div>
+            <div className="mt-4">
+               {PACKAGES.map((pkg) => (
+                 <PackageCard key={pkg.id} pkg={pkg} onBook={handleBook} />
+               ))}
+            </div>
+          </div>
+        );
+
+      case 'manasik':
+        return (
+          <div className="px-5 pt-20 pb-24 animate-fade-in bg-slate-50 min-h-screen">
+             <div className="fixed top-0 left-0 right-0 max-w-md mx-auto z-20 bg-emerald-800/95 backdrop-blur-sm p-4 text-white shadow-lg rounded-b-xl flex items-center justify-between">
+                 <h2 className="text-lg font-serif font-bold">Informasi Manasik</h2>
+                 <div className="bg-white/20 p-1.5 rounded-lg"><BookOpen size={18}/></div>
+             </div>
+
+            {/* Jadwal */}
+            <div className="mt-4 mb-8">
+              <h3 className="text-sm font-bold text-emerald-800 mb-3 flex items-center uppercase tracking-wider">
+                <Calendar className="mr-2" size={16} /> Jadwal Terdekat
+              </h3>
+              <div className="space-y-3">
+                {MANASIK_SCHEDULE.map((s) => (
+                  <div key={s.id} className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm relative overflow-hidden">
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gold-500"></div>
+                    <h4 className="font-bold text-gray-800">{s.title}</h4>
+                    <p className="text-sm text-emerald-600 font-medium mb-2">{s.date} • {s.time}</p>
+                    <div className="text-xs text-gray-500 flex items-start gap-2">
+                       <MapPin size={12} className="mt-0.5 shrink-0" /> {s.location}
+                    </div>
+                    <div className="text-xs text-gray-500 flex items-start gap-2 mt-1">
+                       <User size={12} className="mt-0.5 shrink-0" /> {s.mentor}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Materi */}
+            <div>
+              <h3 className="text-sm font-bold text-emerald-800 mb-3 flex items-center uppercase tracking-wider">
+                <BookOpen className="mr-2" size={16} /> Materi Pembelajaran
+              </h3>
+              <div className="grid grid-cols-1 gap-3">
+                {MANASIK_MATERIALS.map((m) => (
+                  <div key={m.id} className="bg-white p-3 rounded-lg shadow-sm flex items-center gap-3 border border-gray-100 hover:bg-gray-50 transition cursor-pointer">
+                    <div className={`p-3 rounded-full ${m.type === 'video' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+                      {m.type === 'video' ? <PlayCircle size={20} /> : <FileText size={20} />}
+                    </div>
+                    <div>
+                      <p className="font-bold text-gray-800 text-sm">{m.title}</p>
+                      <p className="text-xs text-gray-500">{m.duration}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'kontak':
+        return (
+          <div className="px-5 pt-20 pb-24 animate-fade-in bg-slate-50 min-h-screen">
+             <div className="fixed top-0 left-0 right-0 max-w-md mx-auto z-20 bg-emerald-800/95 backdrop-blur-sm p-4 text-white shadow-lg rounded-b-xl flex items-center justify-between">
+                 <h2 className="text-lg font-serif font-bold">Hubungi Kami</h2>
+                 <div className="bg-white/20 p-1.5 rounded-lg"><Phone size={18}/></div>
+             </div>
+            
+            {/* Form Section */}
+            <div id="registrasi-form" className="bg-white p-5 rounded-xl shadow-lg border border-emerald-100 mb-6 mt-4">
+              <h3 className="text-base font-bold text-emerald-800 mb-4 border-b pb-2">Pendaftaran & Tanya Jawab</h3>
+              <form onSubmit={handleWhatsAppSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-600 mb-1">NAMA LENGKAP</label>
+                  <input 
+                    type="text" 
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all text-sm"
+                    placeholder="Contoh: Budi Santoso"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-600 mb-1">NOMOR WHATSAPP</label>
+                  <input 
+                    type="tel" 
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all text-sm"
+                    placeholder="0812..."
+                  />
+                </div>
+                <div>
+                    <label className="block text-xs font-bold text-gray-600 mb-1">PILIH PAKET / TOPIK</label>
+                    <select 
+                        value={selectedPackage}
+                        onChange={(e) => setSelectedPackage(e.target.value)}
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all text-sm"
+                    >
+                        <option value="">-- Pilih Topik --</option>
+                        {PACKAGES.map(p => <option key={p.id} value={p.name}>{p.name}</option>)}
+                        <option value="Tanya Umum">Pertanyaan Umum</option>
+                        <option value="Manasik">Info Manasik</option>
+                    </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-600 mb-1">JUMLAH JAMAAH (Opsional)</label>
+                  <input 
+                    type="number" 
+                    min="1"
+                    value={formData.pax}
+                    onChange={(e) => setFormData({...formData, pax: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all text-sm"
+                  />
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-md flex items-center justify-center gap-2 transition-colors mt-2"
+                >
+                  <Send size={18} /> Kirim ke WhatsApp Admin
+                </button>
+              </form>
+            </div>
+
+            {/* Info Section */}
+            <div className="bg-white rounded-xl shadow-sm p-5 border border-gray-100 space-y-4">
+              <div className="flex items-start gap-3">
+                 <div className="bg-emerald-100 p-2 rounded-full text-emerald-600"><MapPin size={20}/></div>
+                 <div>
+                    <h4 className="font-bold text-gray-800 text-sm">Kantor Pusat</h4>
+                    <p className="text-xs text-gray-600">{OFFICE_ADDRESS}</p>
+                 </div>
+              </div>
+              <div className="flex items-start gap-3">
+                 <div className="bg-emerald-100 p-2 rounded-full text-emerald-600"><Phone size={20}/></div>
+                 <div>
+                    <h4 className="font-bold text-gray-800 text-sm">Telepon</h4>
+                    <p className="text-xs text-gray-600">+62 21 7890 1234</p>
+                 </div>
+              </div>
+            </div>
+
+            {/* Maps Embed Placeholder */}
+            <div className="mt-6 rounded-xl overflow-hidden shadow-lg h-48 bg-gray-200 relative border border-gray-200">
+               <iframe 
+                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.4!2d106.8!3d-6.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMDAuMCJTIDEwNsKwNDgnMDAuMCJF!5e0!3m2!1sen!2sid!4v1600000000000!5m2!1sen!2sid" 
+                 width="100%" 
+                 height="100%" 
+                 style={{border:0}} 
+                 allowFullScreen={true} 
+                 loading="lazy"
+                 title="Lokasi Kantor"
+               ></iframe>
+            </div>
+
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-gray-800">
+      {/* Mobile Wrapper */}
+      <div className="max-w-md mx-auto min-h-screen bg-slate-50 relative shadow-2xl overflow-hidden">
+        
+        {/* Main Content Area */}
+        {renderContent()}
+
+        {/* Bottom Navigation */}
+        <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 px-4 py-2 z-50 flex justify-between items-center shadow-[0_-5px_10px_rgba(0,0,0,0.05)] rounded-t-2xl">
+          <button 
+            onClick={() => setActiveTab('beranda')}
+            className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 ${activeTab === 'beranda' ? 'text-emerald-700 -translate-y-2' : 'text-gray-400'}`}
+          >
+            <div className={`${activeTab === 'beranda' ? 'bg-emerald-100 p-2 rounded-full shadow-sm' : ''}`}>
+                <Home size={24} strokeWidth={activeTab === 'beranda' ? 2.5 : 2} />
+            </div>
+            <span className={`text-[10px] font-bold mt-1 ${activeTab === 'beranda' ? 'opacity-100' : 'opacity-70'}`}>Beranda</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('paket')}
+            className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 ${activeTab === 'paket' ? 'text-emerald-700 -translate-y-2' : 'text-gray-400'}`}
+          >
+             <div className={`${activeTab === 'paket' ? 'bg-emerald-100 p-2 rounded-full shadow-sm' : ''}`}>
+                <Package size={24} strokeWidth={activeTab === 'paket' ? 2.5 : 2} />
+             </div>
+            <span className={`text-[10px] font-bold mt-1 ${activeTab === 'paket' ? 'opacity-100' : 'opacity-70'}`}>Paket</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('manasik')}
+            className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 ${activeTab === 'manasik' ? 'text-emerald-700 -translate-y-2' : 'text-gray-400'}`}
+          >
+             <div className={`${activeTab === 'manasik' ? 'bg-emerald-100 p-2 rounded-full shadow-sm' : ''}`}>
+                <BookOpen size={24} strokeWidth={activeTab === 'manasik' ? 2.5 : 2} />
+             </div>
+            <span className={`text-[10px] font-bold mt-1 ${activeTab === 'manasik' ? 'opacity-100' : 'opacity-70'}`}>Manasik</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('kontak')}
+            className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 ${activeTab === 'kontak' ? 'text-emerald-700 -translate-y-2' : 'text-gray-400'}`}
+          >
+             <div className={`${activeTab === 'kontak' ? 'bg-emerald-100 p-2 rounded-full shadow-sm' : ''}`}>
+                <Phone size={24} strokeWidth={activeTab === 'kontak' ? 2.5 : 2} />
+             </div>
+            <span className={`text-[10px] font-bold mt-1 ${activeTab === 'kontak' ? 'opacity-100' : 'opacity-70'}`}>Kontak</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  );
+}
